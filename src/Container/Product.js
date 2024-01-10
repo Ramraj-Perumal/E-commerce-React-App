@@ -26,7 +26,7 @@ const Product = () => {
         <div className='card m-2'>
             {alert && <span className='alert alert-success'>Item added to cart</span>}
             <div className='mt-3'>
-                <img src={props.thumnail} height={350} width={400} alt={props.title} className='border-radius-10' />
+                <img src={props.thumnail} height={350} width={400} alt={props.title} className='img-fluid border-radius-10' />
             </div>
             <div className='card-body mt-3'>
                 <h5 className="card-title">
@@ -39,9 +39,9 @@ const Product = () => {
                 <div className='mt-4'>
                     {props.stack > 0 ? (
                         <>
-                            <button className='btn btn-success' onClick={()=> navigate(`/checkout/${props.id}`)}>Buy now</button>
+                            <button className='btn btn-success me-2' onClick={()=> navigate(`/checkout/${props.id}`)}>Buy now</button>
                             {element?.count > 0 ?
-                            <button className='ms-3 btn btn-outline-warning' onClick={()=> navigate('/cart')}>Go to cart</button> : 
+                            <button className='ms-3 btn btn-outline-warning me-2' onClick={()=> navigate('/cart')}>Go to cart</button> : 
                             <button className='ms-3 btn btn-success' onClick={addToCart}>Add to cart</button>
                             }
                         </>) : (

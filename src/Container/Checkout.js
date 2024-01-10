@@ -7,7 +7,7 @@ import { ProductList } from '../Data/ProductList';
 export const Checkout = () => {
     const params = useParams();
     const list = useSelector((state) => state.cart.list);
-    const [state, setState] = useState(params.id ? [{ ...ProductList.find(element => element.id === parseInt(params.id)), count: 1 }, ]: list);
+    const [state, setState] = useState(params.id ? [{ ...ProductList.find(element => element.id === parseInt(params.id)), count: 1 },] : list);
     const navigate = useNavigate();
 
     const incrementItem = (item) => {
@@ -15,9 +15,9 @@ export const Checkout = () => {
         const index = state.findIndex(
             (product) => product.id === item.id
         );
-        setState((state)=> [
+        setState((state) => [
             ...state.slice(0, index),
-            { ...item, count: item.count + 1},
+            { ...item, count: item.count + 1 },
             ...state.slice(index + 1),
         ]);
     };
@@ -30,9 +30,9 @@ export const Checkout = () => {
             const index = state.findIndex(
                 (product) => product.id === item.id
             );
-            setState((state)=> [
+            setState((state) => [
                 ...state.slice(0, index),
-                { ...item, count: item.count - 1},
+                { ...item, count: item.count - 1 },
                 ...state.slice(index + 1),
             ]);
         }
@@ -42,27 +42,35 @@ export const Checkout = () => {
         const index = state.findIndex(
             (product) => product.id === item.id
         );
-        setState((state)=> [
+        setState((state) => [
             ...state.slice(0, index),
             ...state.slice(index + 1),
         ]);
     }
 
     return (
-        <>
+        <div className="container mt-4">
             {state.length > 0 ? (
                 <>
                     {state.map((item) => (
-                        <ProductListItem {...item}
+                        <ProductListItem
+                            {...item}
                             key={item.id}
                             incrementItem={() => incrementItem(item)}
                             decrementItem={() => decrementItem(item)}
-                            removeItem={() => removeItemInCart(item)} />
+                            removeItem={() => removeItemInCart(item)}
+                        />
                     ))}
-                    <button className='btn btn-success' onClick={() => navigate('/success')}>Place order</button>
+                    <div className="d-flex justify-content-center mt-3">
+                        <button className="btn btn-success" onClick={() => navigate('/success')}>
+                            Place order
+                        </button>
+                    </div>
                 </>
             ) : (
-                <h4>No fruits items in the checkout</h4>)}
-        </>
-    )
-}
+                <h4>No fruit items in the checkout</h4>
+            )}
+        </div>
+    );
+};
+
